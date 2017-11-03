@@ -6,26 +6,6 @@
 //  Copyright © 2017 Cardinal Labs. All rights reserved.
 //
 
-/**
- Market endpoints interface
- */
-protocol MarketClientInterface {
-    /**
-     Latest price for all symbols.
-     */
-    func getAllPrices(completion: @escaping allPricesCompletion)
-
-    /**
-     Latest price for a specific symbol.
-     */
-    func getPrice(for symbol: String, completion: @escaping symbolPriceCompletion)
-
-    /**
-     Get order book (depth) of a specific symbol
-     */
-    func getDepth(for symbol: String, limit: Int?, completion: @escaping depthCompletion)
-}
-
 extension BinanceClient: MarketClientInterface {
     func getAllPrices(completion: @escaping allPricesCompletion) {
         HTTPClient.sharedInstance.execute(type: .get, endpoint: .allPrices, params: nil, success: { (json) in

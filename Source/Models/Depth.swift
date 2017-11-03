@@ -8,6 +8,15 @@
 
 import Foundation
 
+/**
+ Depth represents the order book of a specific symbol. Main data properties are bids and asks. Each one being a dictionary that maps price -> quanitity
+
+ - parameter lastUpdateId: ID of the last updated which will be mainly used for caching purposes
+ - parameter symbol: The currency symbol the depth object will represent (i.e LTCBTC)
+ - parameter bids: Dictionary that maps price -> quanitity
+ - parameter asks: Dictionary that maps price -> quanitity
+*/
+
 class Depth {
     public private(set) var lastUpdateId: Int = 0
     public private(set) var symbol: String = ""

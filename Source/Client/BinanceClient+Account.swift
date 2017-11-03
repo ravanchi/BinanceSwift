@@ -6,10 +6,6 @@
 //  Copyright © 2017 Cardinal Labs. All rights reserved.
 //
 
-protocol AccountClientInterface {
-
-}
-
 extension BinanceClient: AccountClientInterface {
 
 }
