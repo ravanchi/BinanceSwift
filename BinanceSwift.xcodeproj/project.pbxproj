@@ -15,6 +15,10 @@
 		10547AC41FABEDA9005F6692 /* BinanceSwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10547AC31FABEDA9005F6692 /* BinanceSwiftTests.swift */; };
 		10547AD21FABF140005F6692 /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10547AD11FABF140005F6692 /* HTTPClient.swift */; };
 		10547AD41FABF559005F6692 /* APIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10547AD31FABF559005F6692 /* APIConstants.swift */; };
+		10547AD61FAC011C005F6692 /* BinanceClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10547AD51FAC011C005F6692 /* BinanceClient.swift */; };
+		10547AD81FAC03E0005F6692 /* BinanceClient+Market.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10547AD71FAC03E0005F6692 /* BinanceClient+Market.swift */; };
+		10547ADA1FAC0453005F6692 /* BinanceClient+Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10547AD91FAC0453005F6692 /* BinanceClient+Account.swift */; };
+		10547ADC1FAC0495005F6692 /* BinanceClient+General.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10547ADB1FAC0495005F6692 /* BinanceClient+General.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +44,10 @@
 		10547AC51FABEDA9005F6692 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		10547AD11FABF140005F6692 /* HTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
 		10547AD31FABF559005F6692 /* APIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConstants.swift; sourceTree = "<group>"; };
+		10547AD51FAC011C005F6692 /* BinanceClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinanceClient.swift; sourceTree = "<group>"; };
+		10547AD71FAC03E0005F6692 /* BinanceClient+Market.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BinanceClient+Market.swift"; sourceTree = "<group>"; };
+		10547AD91FAC0453005F6692 /* BinanceClient+Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BinanceClient+Account.swift"; sourceTree = "<group>"; };
+		10547ADB1FAC0495005F6692 /* BinanceClient+General.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BinanceClient+General.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,11 +71,11 @@
 		10547AA21FABEDA9005F6692 = {
 			isa = PBXGroup;
 			children = (
-				10547AD01FABEFE8005F6692 /* Clients */,
+				10547AD01FABEFE8005F6692 /* Client */,
 				10547ACF1FABEFD3005F6692 /* Networking */,
 				10547ACE1FABEFC7005F6692 /* Models */,
-				10547AAD1FABEDA9005F6692 /* BinanceSwift */,
-				10547AC21FABEDA9005F6692 /* BinanceSwiftTests */,
+				10547AAD1FABEDA9005F6692 /* Examples */,
+				10547AC21FABEDA9005F6692 /* Tests */,
 				10547AAC1FABEDA9005F6692 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -81,7 +89,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		10547AAD1FABEDA9005F6692 /* BinanceSwift */ = {
+		10547AAD1FABEDA9005F6692 /* Examples */ = {
 			isa = PBXGroup;
 			children = (
 				10547AAE1FABEDA9005F6692 /* AppDelegate.swift */,
@@ -91,16 +99,16 @@
 				10547AB71FABEDA9005F6692 /* LaunchScreen.storyboard */,
 				10547ABA1FABEDA9005F6692 /* Info.plist */,
 			);
-			path = BinanceSwift;
+			path = Examples;
 			sourceTree = "<group>";
 		};
-		10547AC21FABEDA9005F6692 /* BinanceSwiftTests */ = {
+		10547AC21FABEDA9005F6692 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
 				10547AC31FABEDA9005F6692 /* BinanceSwiftTests.swift */,
 				10547AC51FABEDA9005F6692 /* Info.plist */,
 			);
-			path = BinanceSwiftTests;
+			path = Tests;
 			sourceTree = "<group>";
 		};
 		10547ACE1FABEFC7005F6692 /* Models */ = {
@@ -119,11 +127,15 @@
 			path = Networking;
 			sourceTree = "<group>";
 		};
-		10547AD01FABEFE8005F6692 /* Clients */ = {
+		10547AD01FABEFE8005F6692 /* Client */ = {
 			isa = PBXGroup;
 			children = (
+				10547AD51FAC011C005F6692 /* BinanceClient.swift */,
+				10547AD71FAC03E0005F6692 /* BinanceClient+Market.swift */,
+				10547AD91FAC0453005F6692 /* BinanceClient+Account.swift */,
+				10547ADB1FAC0495005F6692 /* BinanceClient+General.swift */,
 			);
-			path = Clients;
+			path = Client;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -230,9 +242,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				10547AD41FABF559005F6692 /* APIConstants.swift in Sources */,
+				10547AD61FAC011C005F6692 /* BinanceClient.swift in Sources */,
 				10547AB11FABEDA9005F6692 /* ViewController.swift in Sources */,
+				10547ADA1FAC0453005F6692 /* BinanceClient+Account.swift in Sources */,
 				10547AAF1FABEDA9005F6692 /* AppDelegate.swift in Sources */,
 				10547AD21FABF140005F6692 /* HTTPClient.swift in Sources */,
+				10547ADC1FAC0495005F6692 /* BinanceClient+General.swift in Sources */,
+				10547AD81FAC03E0005F6692 /* BinanceClient+Market.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -387,7 +403,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 38C527AXUX;
-				INFOPLIST_FILE = BinanceSwift/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Examples/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.cardinalLabs.BinanceSwift;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -402,7 +418,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 38C527AXUX;
-				INFOPLIST_FILE = BinanceSwift/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Examples/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.cardinalLabs.BinanceSwift;
 				PRODUCT_NAME = "$(TARGET_NAME)";

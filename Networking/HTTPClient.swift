@@ -20,9 +20,22 @@ enum RequestType: String {
 }
 
 protocol HTTPClientInterface {
+    /**
+     Executes a HTTP call to the Binance API.
+
+     - parameter type: The type of HTTP request (GET or POST)
+     - parameter endpoint: The API endpoint being hit (i.e time, ping, depth, etc.)
+     - parameter params: Addition parameters being sent to the Binance API
+     - parameter success: Success callback with the json returned from the Binance API
+     - parameter failed: Failed callback with error object highlighting what went wrong
+     */
     func execute(type: RequestType, endpoint: Endpoint, params: JSONType?, success: @escaping HTTPClientSuccessCompletion, failed: @escaping HTTPClientFailedCompletion)
 }
 
+/**
+ Binance specific HTTPClient that communicates with the Binance REST API.
+ This is intended to be an internal class that the BinanceClient utilizes. Please look at the BinanceClient to see if a convenience interface has been made for the endpoint you want to interact with.
+ */
 class HTTPClient: HTTPClientInterface {
     static let sharedInstance = HTTPClient()
 

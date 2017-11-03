@@ -7,9 +7,12 @@
 //
 
 enum Endpoint: String {
+    case ping = "ping"
     case time = "time"
 }
 
 struct APIConstants {
     static let baseURL = "https://www.binance.com/api/v1/"
+
+    static let serverTime = "serverTime"
 }
