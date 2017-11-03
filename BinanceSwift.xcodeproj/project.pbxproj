@@ -19,6 +19,9 @@
 		10547AD81FAC03E0005F6692 /* BinanceClient+Market.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10547AD71FAC03E0005F6692 /* BinanceClient+Market.swift */; };
 		10547ADA1FAC0453005F6692 /* BinanceClient+Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10547AD91FAC0453005F6692 /* BinanceClient+Account.swift */; };
 		10547ADC1FAC0495005F6692 /* BinanceClient+General.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10547ADB1FAC0495005F6692 /* BinanceClient+General.swift */; };
+		10547ADF1FACBF44005F6692 /* APIParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10547ADE1FACBF44005F6692 /* APIParser.swift */; };
+		10547AE31FACC137005F6692 /* BinanceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10547AE21FACC137005F6692 /* BinanceError.swift */; };
+		10547AE51FACD123005F6692 /* Depth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10547AE41FACD123005F6692 /* Depth.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +51,9 @@
 		10547AD71FAC03E0005F6692 /* BinanceClient+Market.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BinanceClient+Market.swift"; sourceTree = "<group>"; };
 		10547AD91FAC0453005F6692 /* BinanceClient+Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BinanceClient+Account.swift"; sourceTree = "<group>"; };
 		10547ADB1FAC0495005F6692 /* BinanceClient+General.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BinanceClient+General.swift"; sourceTree = "<group>"; };
+		10547ADE1FACBF44005F6692 /* APIParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIParser.swift; sourceTree = "<group>"; };
+		10547AE21FACC137005F6692 /* BinanceError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinanceError.swift; sourceTree = "<group>"; };
+		10547AE41FACD123005F6692 /* Depth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Depth.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +77,7 @@
 		10547AA21FABEDA9005F6692 = {
 			isa = PBXGroup;
 			children = (
+				10547ADD1FACBF09005F6692 /* Utilities */,
 				10547AD01FABEFE8005F6692 /* Client */,
 				10547ACF1FABEFD3005F6692 /* Networking */,
 				10547ACE1FABEFC7005F6692 /* Models */,
@@ -114,6 +121,7 @@
 		10547ACE1FABEFC7005F6692 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				10547AE41FACD123005F6692 /* Depth.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -123,6 +131,7 @@
 			children = (
 				10547AD11FABF140005F6692 /* HTTPClient.swift */,
 				10547AD31FABF559005F6692 /* APIConstants.swift */,
+				10547ADE1FACBF44005F6692 /* APIParser.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -136,6 +145,14 @@
 				10547ADB1FAC0495005F6692 /* BinanceClient+General.swift */,
 			);
 			path = Client;
+			sourceTree = "<group>";
+		};
+		10547ADD1FACBF09005F6692 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				10547AE21FACC137005F6692 /* BinanceError.swift */,
+			);
+			path = Utilities;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -242,12 +259,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				10547AD41FABF559005F6692 /* APIConstants.swift in Sources */,
+				10547AE51FACD123005F6692 /* Depth.swift in Sources */,
 				10547AD61FAC011C005F6692 /* BinanceClient.swift in Sources */,
 				10547AB11FABEDA9005F6692 /* ViewController.swift in Sources */,
 				10547ADA1FAC0453005F6692 /* BinanceClient+Account.swift in Sources */,
 				10547AAF1FABEDA9005F6692 /* AppDelegate.swift in Sources */,
+				10547AE31FACC137005F6692 /* BinanceError.swift in Sources */,
 				10547AD21FABF140005F6692 /* HTTPClient.swift in Sources */,
 				10547ADC1FAC0495005F6692 /* BinanceClient+General.swift in Sources */,
+				10547ADF1FACBF44005F6692 /* APIParser.swift in Sources */,
 				10547AD81FAC03E0005F6692 /* BinanceClient+Market.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

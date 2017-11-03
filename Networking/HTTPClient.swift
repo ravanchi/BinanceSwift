@@ -8,15 +8,15 @@
 
 import Foundation
 
-typealias JSONType = [String: Any]
-typealias HTTPClientSuccessCompletion = (JSONType) -> Void
-typealias HTTPClientFailedCompletion = (Error) -> Void
+typealias HTTPClientSuccessCompletion = (Any) -> Void
+typealias HTTPClientFailedCompletion = (BinanceError) -> Void
 
-private typealias dataTaskCompletion = (_ didSucceed: Bool, _ json: JSONType?) -> Void
+private typealias dataTaskSuccessCompletion = (Any?) -> Void
+private typealias dataTaskFailedCompletion = (BinanceError) -> Void
 
 enum RequestType: String {
-    case GET = "GET"
-    case POST = "POST"
+    case get
+    case post
 }
 
 protocol HTTPClientInterface {
@@ -29,7 +29,7 @@ protocol HTTPClientInterface {
      - parameter success: Success callback with the json returned from the Binance API
      - parameter failed: Failed callback with error object highlighting what went wrong
      */
-    func execute(type: RequestType, endpoint: Endpoint, params: JSONType?, success: @escaping HTTPClientSuccessCompletion, failed: @escaping HTTPClientFailedCompletion)
+    func execute(type: RequestType, endpoint: Endpoint, params: [String: Any]?, success: @escaping HTTPClientSuccessCompletion, failed: @escaping HTTPClientFailedCompletion)
 }
 
 /**
@@ -39,36 +39,62 @@ protocol HTTPClientInterface {
 class HTTPClient: HTTPClientInterface {
     static let sharedInstance = HTTPClient()
 
-    func execute(type: RequestType, endpoint: Endpoint, params: JSONType?, success: @escaping HTTPClientSuccessCompletion, failed: @escaping HTTPClientFailedCompletion) {
+    func execute(type: RequestType, endpoint: Endpoint, params: [String: Any]?, success: @escaping HTTPClientSuccessCompletion, failed: @escaping HTTPClientFailedCompletion) {
+        var requestString = APIConstants.baseURL + endpoint.rawValue
+        if let params = params {
+            requestString.append("?" + generateParamsString(params: params))
+        }
 
-        var request = URLRequest(url: NSURL(string: APIConstants.baseURL + endpoint.rawValue)! as URL)
+        var request = URLRequest(url: NSURL(string: requestString)! as URL)
         request.httpMethod = type.rawValue
 
-        dataTask(request: request) { (didSucceed, jsonObject) in
-            if let json = jsonObject, didSucceed {
-                success(json)
-            } else {
-                // TODO: Call failed completion with error
+        dataTask(request: request, taskSuccess: { (json) in
+            guard let json = json else {
+                failed(BinanceError.failedResponse)
+                return
             }
-        }
+
+            success(json)
+        }, taskFailed: { (error) in
+            failed(error)
+        })
     }
 }
 
 fileprivate extension Helpers {
-    func dataTask(request: URLRequest, completion: @escaping dataTaskCompletion) {
+    func dataTask(request: URLRequest, taskSuccess: @escaping dataTaskSuccessCompletion, taskFailed: @escaping dataTaskFailedCompletion) {
         let session = URLSession(configuration: URLSessionConfiguration.default)
 
         session.dataTask(with: request) { (data, response, error) -> Void in
             if let data = data {
                 let json = try? JSONSerialization.jsonObject(with: data, options: [])
                 if let response = response as? HTTPURLResponse, 200...299 ~= response.statusCode {
-                    completion(true, json as? JSONType)
+                    taskSuccess(json)
                 } else {
-                    // TODO: Handle errors better here
-                    completion(false, json as? JSONType)
+                    // Either
+                    // datask failed to reach server? no connection?
+                    // datask reached the server, but request could be invalid or failed
+
+                    // Reached the server, but got a failed status code
+                    if json != nil {
+                        taskFailed(BinanceError.failedResponse)
+                    } else {
+                        taskFailed(BinanceError.noResponse)
+                    }
                 }
             }
         }.resume()
+    }
+
+    func generateParamsString(params: [String: Any]) -> String {
+        var generatedString = ""
+        for key in params.keys {
+            if let paramsValue = params[key] {
+                generatedString.append(key + "=" + String(describing: paramsValue))
+            }
+        }
+
+        return generatedString
     }
 }
 

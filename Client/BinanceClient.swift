@@ -13,6 +13,7 @@ Need to instantiate client in order to start making calls to the API.
 - parameter apiKey: Optional parameter which is only needed if interacting with a secure endpoint. Create one at https://www.binance.com/userCenter/createApi.html
 - parameter secretKey: Optional parameter which is only needed if interacting with a secure endpoint. Create one at https://www.binance.com/userCenter/createApi.html
 */
+
 class BinanceClient {
     private var apiKey: String?
     private var secretKey: String?
