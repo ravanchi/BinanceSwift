@@ -12,7 +12,11 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        HTTPClient.sharedInstance.execute(type: .GET, endpoint: Endpoint.time, params: nil, success: { (json) in
+            print(json)
+        }) { (error) in
+            print("in here")
+        }
     }
 
     override func didReceiveMemoryWarning() {

@@ -13,6 +13,8 @@
 		10547AB61FABEDA9005F6692 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 10547AB51FABEDA9005F6692 /* Assets.xcassets */; };
 		10547AB91FABEDA9005F6692 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 10547AB71FABEDA9005F6692 /* LaunchScreen.storyboard */; };
 		10547AC41FABEDA9005F6692 /* BinanceSwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10547AC31FABEDA9005F6692 /* BinanceSwiftTests.swift */; };
+		10547AD21FABF140005F6692 /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10547AD11FABF140005F6692 /* HTTPClient.swift */; };
+		10547AD41FABF559005F6692 /* APIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10547AD31FABF559005F6692 /* APIConstants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +38,8 @@
 		10547ABF1FABEDA9005F6692 /* BinanceSwiftTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BinanceSwiftTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		10547AC31FABEDA9005F6692 /* BinanceSwiftTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinanceSwiftTests.swift; sourceTree = "<group>"; };
 		10547AC51FABEDA9005F6692 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		10547AD11FABF140005F6692 /* HTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
+		10547AD31FABF559005F6692 /* APIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConstants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +63,9 @@
 		10547AA21FABEDA9005F6692 = {
 			isa = PBXGroup;
 			children = (
+				10547AD01FABEFE8005F6692 /* Clients */,
+				10547ACF1FABEFD3005F6692 /* Networking */,
+				10547ACE1FABEFC7005F6692 /* Models */,
 				10547AAD1FABEDA9005F6692 /* BinanceSwift */,
 				10547AC21FABEDA9005F6692 /* BinanceSwiftTests */,
 				10547AAC1FABEDA9005F6692 /* Products */,
@@ -94,6 +101,29 @@
 				10547AC51FABEDA9005F6692 /* Info.plist */,
 			);
 			path = BinanceSwiftTests;
+			sourceTree = "<group>";
+		};
+		10547ACE1FABEFC7005F6692 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		10547ACF1FABEFD3005F6692 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				10547AD11FABF140005F6692 /* HTTPClient.swift */,
+				10547AD31FABF559005F6692 /* APIConstants.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		10547AD01FABEFE8005F6692 /* Clients */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Clients;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -199,8 +229,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				10547AD41FABF559005F6692 /* APIConstants.swift in Sources */,
 				10547AB11FABEDA9005F6692 /* ViewController.swift in Sources */,
 				10547AAF1FABEDA9005F6692 /* AppDelegate.swift in Sources */,
+				10547AD21FABF140005F6692 /* HTTPClient.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
