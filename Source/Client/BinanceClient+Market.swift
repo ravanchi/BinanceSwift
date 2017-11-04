@@ -7,7 +7,7 @@
 //
 
 extension BinanceClient: MarketClientInterface {
-    func getAllPrices(completion: @escaping allPricesCompletion) {
+    func getAllPrices(completion: @escaping AllPricesCompletion) {
         HTTPClient.sharedInstance.execute(type: .get, endpoint: .allPrices, params: nil, success: { (json) in
             if let prices = APIParser.parseAllPrices(json: json) {
                 completion(prices, nil)
@@ -19,7 +19,7 @@ extension BinanceClient: MarketClientInterface {
         })
     }
 
-    func getPrice(for symbol: String, completion: @escaping symbolPriceCompletion) {
+    func getPrice(for symbol: String, completion: @escaping SymbolPriceCompletion) {
         getAllPrices { (prices, error) in
             guard let prices = prices else {
                 completion(nil, error)
@@ -34,10 +34,10 @@ extension BinanceClient: MarketClientInterface {
         }
     }
 
-    func getDepth(for symbol: String, limit: Int?, completion: @escaping depthCompletion) {
-        var params: [String: Any] = [APIConstants.symbol: symbol]
+    func getDepth(for symbol: String, limit: Int?, completion: @escaping DepthCompletion) {
+        var params: [String: String] = [APIConstants.symbol: symbol]
         if let limit = limit {
-            params[APIConstants.limit] = limit
+            params[APIConstants.limit] = String(limit)
         }
 
         HTTPClient.sharedInstance.execute(type: .get, endpoint: .depth, params: params, success: { (json) in
@@ -52,6 +52,6 @@ extension BinanceClient: MarketClientInterface {
     }
 }
 
-typealias allPricesCompletion = (_ prices: [String: Double]?, _ error: BinanceError?) -> Void
-typealias symbolPriceCompletion = (_ price: Double?, _ error: BinanceError?) -> Void
-typealias depthCompletion = (_ depth: Depth?, _ error: BinanceError?) -> Void
+typealias AllPricesCompletion = (_ prices: [String: Double]?, _ error: BinanceError?) -> Void
+typealias SymbolPriceCompletion = (_ price: Double?, _ error: BinanceError?) -> Void
+typealias DepthCompletion = (_ depth: Depth?, _ error: BinanceError?) -> Void

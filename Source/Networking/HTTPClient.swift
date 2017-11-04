@@ -29,7 +29,7 @@ protocol HTTPClientInterface {
      - parameter success: Success callback with the json returned from the Binance API
      - parameter failed: Failed callback with error object highlighting what went wrong
      */
-    func execute(type: RequestType, endpoint: Endpoint, params: [String: Any]?, success: @escaping HTTPClientSuccessCompletion, failed: @escaping HTTPClientFailedCompletion)
+    func execute(type: RequestType, endpoint: Endpoint, params: [String: String]?, success: @escaping HTTPClientSuccessCompletion, failed: @escaping HTTPClientFailedCompletion)
 }
 
 /**
@@ -39,14 +39,35 @@ protocol HTTPClientInterface {
 class HTTPClient: HTTPClientInterface {
     static let sharedInstance = HTTPClient()
 
-    func execute(type: RequestType, endpoint: Endpoint, params: [String: Any]?, success: @escaping HTTPClientSuccessCompletion, failed: @escaping HTTPClientFailedCompletion) {
+    func execute(type: RequestType, endpoint: Endpoint, params: [String: String]?, success: @escaping HTTPClientSuccessCompletion, failed: @escaping HTTPClientFailedCompletion) {
+        var queryParams = params ?? [:]
+
         var requestString = APIConstants.baseURL + endpoint.rawValue
-        if let params = params {
-            requestString.append("?" + generateParamsString(params: params))
+
+        if endpoint.isSigned() {
+            queryParams["timestamp"] = String(Date().timeIntervalSince1970)
+
+            if let secret = queryParams[APIConstants.secret] {
+                let tempRequestString = requestString + "?" + generateParamsString(params: queryParams)
+                queryParams[APIConstants.signature] = tempRequestString.hmac(algorithm: .SHA256, key: secret)
+            } else {
+                failed(.invalidKeys)
+            }
         }
+
+
+        requestString.append("?" + generateParamsString(params: queryParams))
 
         var request = URLRequest(url: NSURL(string: requestString)! as URL)
         request.httpMethod = type.rawValue
+
+        if type == .post {
+            request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+
+            if let apiKey = queryParams[APIConstants.apiKey], endpoint.isSigned() {
+                request.setValue(apiKey, forHTTPHeaderField: APIConstants.headerApiKey)
+            }
+        }
 
         dataTask(request: request, taskSuccess: { (json) in
             guard let json = json else {
@@ -86,11 +107,15 @@ fileprivate extension Helpers {
         }.resume()
     }
 
-    func generateParamsString(params: [String: Any]) -> String {
+    func generateParamsString(params: [String: String]) -> String {
         var generatedString = ""
-        for key in params.keys {
-            if let paramsValue = params[key] {
-                generatedString.append(key + "=" + String(describing: paramsValue))
+
+        // filter out the apikey and secret if present
+        let filteredParams = params.filter({$0.key != APIConstants.apiKey && $0.key != APIConstants.secret})
+
+        for key in filteredParams.keys {
+            if let paramsValue = filteredParams[key] {
+                generatedString.append(key + "=" + paramsValue)
             }
         }
 

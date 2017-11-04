@@ -33,27 +33,37 @@ protocol MarketClientInterface {
      Latest price for all symbols.
      - parameter completion: If no error was encountered, returns back a dictionary mapping symbol -> price for all symbols returned
      */
-    func getAllPrices(completion: @escaping allPricesCompletion)
+    func getAllPrices(completion: @escaping AllPricesCompletion)
 
     /**
      Latest price for a specific symbol.
      - parameter symbol: The currency symbol we want the price for (i.e LTCBTC)
      - parameter completion: If no error was encountered, returns back a double representing the price for the symbol
      */
-    func getPrice(for symbol: String, completion: @escaping symbolPriceCompletion)
+    func getPrice(for symbol: String, completion: @escaping SymbolPriceCompletion)
 
     /**
-     Get order book (depth) of a specific symbol
+     Get order book (depth) of a specific symbol.
      - parameter symbol: The currency symbol we want the depth for (i.e LTCBTC)
      - parameter limit: # of results we want for each bids and asks. Default/Max is 100
      - parameter completion: If no error was encountered, returns back a Depth object
      */
-    func getDepth(for symbol: String, limit: Int?, completion: @escaping depthCompletion)
+    func getDepth(for symbol: String, limit: Int?, completion: @escaping DepthCompletion)
 }
 
 /**
  Account endpoints interface
  */
 protocol AccountClientInterface {
+    /**
+     Get current account information.
+     - parameter completion: If no error was encountered, returns back an Account object
+     */
+    func getAccount(completion: @escaping AccountCompletion)
 
+    /**
+     Get all open orders on a symbol.
+     - parameter completion: If no error was encountered, returns back an Account object
+     */
+    func getOpenOrders(for symbol: String, completion: @escaping OpenOrdersCompletion)
 }

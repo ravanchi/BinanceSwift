@@ -15,8 +15,8 @@ Need to instantiate client in order to start making calls to the API.
 */
 
 class BinanceClient {
-    private var apiKey: String?
-    private var secretKey: String?
+    public private(set) var apiKey: String?
+    public private(set) var secretKey: String?
 
     convenience init(apiKey: String, secretKey: String) {
         self.init()

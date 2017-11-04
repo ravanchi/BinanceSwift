@@ -12,4 +12,5 @@ enum BinanceError: Error {
     case parsingFailed
     case noResponse
     case failedResponse
+    case invalidKeys
 }

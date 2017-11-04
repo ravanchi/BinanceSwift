@@ -6,8 +6,6 @@
 //  Copyright © 2017 Cardinal Labs. All rights reserved.
 //
 
-import Foundation
-
 /**
  Depth represents the order book of a specific symbol. Main data properties are bids and asks. Each one being a dictionary that maps price -> quanitity
 

@@ -9,6 +9,8 @@
 import Foundation
 
 class APIParser {
+    // MARK: General endpoint parsers
+
     static func parseServerTime(json: Any) -> Int? {
         guard let serverTimeJSON = json as? [String: Any] else { return nil }
 
@@ -33,6 +35,8 @@ class APIParser {
         }
     }
 
+    // MARK: Market endpoint parsers
+
     static func parseSymbolDepth(symbol: String, json: Any) -> Depth? {
         guard let depthJSON = json as? [String: Any],
             let lastUpdateId = depthJSON[APIConstants.lastUpdateId] as? Int,
@@ -48,6 +52,14 @@ class APIParser {
         return Depth(lastUpdateId: lastUpdateId, symbol: symbol, bids: bids, asks: asks)
     }
 
+    // MARK: Account endpoint parsers
+
+    static func parseAccountInformation(json: Any) -> Account? {
+        return nil
+    }
+}
+
+extension Helpers {
     private static func filterDepthData(with dataArray: [Any]) -> [Double: Double] {
         var data = [Double: Double]()
 
@@ -61,3 +73,5 @@ class APIParser {
         return data
     }
 }
+
+private typealias Helpers = APIParser
